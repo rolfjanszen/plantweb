@@ -12,6 +12,12 @@
     <h1>Pi 4B Sensor Dashboard</h1>
     <div id="plots">
         {% for graph in graphs %}
+
+        <button onclick="fetch_new_readings(' {{ loop.index }}')">Test Button</button>
+        <form action="/get_data/{{ loop.index }}" method="post">
+            <button name="backwardBtn" type="submit">Get Data</button>
+            
+        </form>
             <div class="graph-container">
                 <div id="chart-{{ loop.index }}"></div>
                 <script>
