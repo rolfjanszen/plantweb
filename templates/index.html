@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pi Soil Monitor</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
+        .graph-container { background: white; margin-bottom: 30px; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+    <h1>Pi 4B Sensor Dashboard</h1>
+    <div id="plots">
+        {% for graph in graphs %}
+            <div class="graph-container">
+                <div id="chart-{{ loop.index }}"></div>
+                <script>
+                    var spec = {{ graph | safe }};
+                    Plotly.newPlot('chart-{{ loop.index }}', spec.data, spec.layout);
+                </script>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
