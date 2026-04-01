@@ -15,7 +15,7 @@ def get_data():
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
     # Pulling more data points to fill the graph nicely
-    cursor.execute("SELECT timestamp, voltage, channel FROM readings ORDER BY timestamp DESC LIMIT 300")
+    cursor.execute("SELECT timestamp, voltage, channel FROM readings ORDER BY timestamp DESC LIMIT 900")
     data = cursor.fetchall()
     conn.close()
     return data
@@ -70,10 +70,11 @@ def index():
 
     return render_template('index.html', graphs=graphs)
 
-@app.route('/get_data/<int:channel>', methods=['POST'])
-def fetch_new_readings(channel):
-    print(f"Fetching new readings for channel {channel}...")
-    read_sinle_channel(channel)
+@app.route('/get_data/<int:channel_nr>', methods=['POST'])
+def fetch_new_readings(channel_nr):
+    print(f"Fetching new readings for channel {channel_nr}...")
+    channel_nr=channel_nr-1
+    read_sinle_channel(channel_nr)
     rows = get_data()
     channels = get_chaneels(rows)
     graphs = get_graphs(channels)

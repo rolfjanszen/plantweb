@@ -4,10 +4,13 @@ import random
 
 
 def is_raspberry_pi():
+    return True
     try:
         # Check if the hardware description file exists (Pi specific)
         if os.path.exists('/proc/device-tree/model'):
+            print("file exists")
             with open('/proc/device-tree/model', 'r') as f:
+                print(f.read())
                 return 'Raspberry Pi' in f.read()
     except Exception:
         return False
@@ -29,6 +32,8 @@ if is_raspberry_pi():
     conn = sqlite3.connect('ads1115_readings.db')
     soil_channels =[AnalogIn(ads, 0), AnalogIn(ads, 1), AnalogIn(ads, 2)]
 else:
+
+    print("not on pi")
     soil_channels = [None, None, None]
 
 
