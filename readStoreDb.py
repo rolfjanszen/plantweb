@@ -116,6 +116,6 @@ if __name__ =="__main__":
         t,v=read_and_store_ads1115()
         print(t,v)
         
-        time.sleep(5)
+        time.sleep(1)
 
 

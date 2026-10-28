@@ -15,7 +15,7 @@ def get_data():
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
     # Pulling more data points to fill the graph nicely
-    cursor.execute("SELECT timestamp, voltage, channel FROM readings ORDER BY timestamp DESC LIMIT 900")
+    cursor.execute("SELECT timestamp, voltage, channel FROM readings ORDER BY timestamp DESC LIMIT 5000")
     data = cursor.fetchall()
     conn.close()
     return data
